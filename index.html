@@ -279,12 +279,15 @@
 
         /* Game cards */
 
-        .games {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 28px;
-            margin-top: 55px;
-        }
+       .games {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(350px, 1fr)
+    );
+    gap: 28px;
+    margin-top: 55px;
+}
 
         .game-card {
             position: relative;
@@ -824,7 +827,138 @@
 
             </div>
         </section>
+</section>
 
+<section class="section reveal" id="released-games">
+
+    <p class="section-label">
+        Released games
+    </p>
+
+    <h2 class="section-title">
+        Previous releases
+    </h2>
+
+    <p class="section-description">
+        Games previously released on Steam by Sungame Studio.
+    </p>
+
+    <div class="games">
+
+        <article class="game-card">
+            <img
+                class="game-card-background"
+                src="assets/submarine-terror.webp"
+                alt="Submarine Terror"
+            >
+
+            <div class="game-card-overlay"></div>
+
+            <div class="game-card-content">
+
+                <span class="game-status">
+                    Released
+                </span>
+
+                <h2 class="game-title">
+                    Submarine Terror
+                </h2>
+
+                <p class="game-description">
+                    A sinister entity lurks in the depths.
+                    Descend into the abyss and extract knowledge about it.
+                </p>
+
+                <a
+                    class="button button-primary"
+                    href="TON_LIEN_STEAM_SUBMARINE"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    View on Steam
+                </a>
+
+            </div>
+        </article>
+
+        <article class="game-card">
+            <img
+                class="game-card-background"
+                src="assets/lexys-story.webp"
+                alt="Lexy's Story"
+            >
+
+            <div class="game-card-overlay"></div>
+
+            <div class="game-card-content">
+
+                <span class="game-status">
+                    Released
+                </span>
+
+                <h2 class="game-title">
+                    Refund Me If You Can :
+                    Lexy's Story
+                </h2>
+
+                <p class="game-description">
+                    Lexy's grandmother is sick.
+                    Will you be fast enough to bring her medication in time?
+                </p>
+
+                <a
+                    class="button button-primary"
+                    href="TON_LIEN_STEAM_LEXY"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    View on Steam
+                </a>
+
+            </div>
+        </article>
+
+        <article class="game-card">
+            <img
+                class="game-card-background"
+                src="assets/refund-me.webp"
+                alt="Refund Me If You Can"
+            >
+
+            <div class="game-card-overlay"></div>
+
+            <div class="game-card-content">
+
+                <span class="game-status">
+                    Released
+                </span>
+
+                <h2 class="game-title">
+                    Refund Me If You Can
+                </h2>
+
+                <p class="game-description">
+                    One maze. One monster tracking you down.
+                    Escape the nightmare before time runs out.
+                </p>
+
+                <a
+                    class="button button-primary"
+                    href="TON_LIEN_STEAM_REFUND"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    View on Steam
+                </a>
+
+            </div>
+        </article>
+
+    </div>
+
+</section>
+
+<section class="section reveal" id="gallery">
         <section class="section reveal" id="gallery">
             <p class="section-label">Inside our worlds</p>
 
