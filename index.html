@@ -691,6 +691,7 @@
 
         <section class="hero" id="home">
             <video
+                id="heroVideo"
                 class="hero-video"
                 autoplay
                 muted
@@ -1132,6 +1133,13 @@
 
         document.getElementById("current-year").textContent =
             new Date().getFullYear();
+
+        const heroVideo =
+    document.getElementById("heroVideo");
+
+if (heroVideo) {
+    heroVideo.playbackRate = 0.7;
+}
     </script>
 
 </body>
