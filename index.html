@@ -1,56 +1,995 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Sungame Studio</title>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Sun Game Studio is an independent game studio creating original and memorable games."
+    >
+
+    <meta name="theme-color" content="#080808">
+
+    <title>Sun Game Studio</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="assets/favicon.png"
+    >
 
     <style>
-        body{
-            background:#111;
-            color:white;
-            font-family:Arial;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
-            margin:0;
+        :root {
+            --background: #080808;
+            --background-soft: #111111;
+            --card: #151515;
+            --text: #ffffff;
+            --text-soft: #b5b5b5;
+            --border: rgba(255, 255, 255, 0.14);
+            --accent: #f2c96d;
+            --max-width: 1280px;
         }
 
-        h1{
-            font-size:60px;
-            margin-bottom:10px;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        p{
-            color:#aaa;
-            margin-bottom:40px;
+        html {
+            scroll-behavior: smooth;
         }
 
-        a{
-            color:white;
-            text-decoration:none;
-            border:2px solid white;
-            padding:15px 30px;
-            border-radius:10px;
-            transition:0.2s;
+        body {
+            background: var(--background);
+            color: var(--text);
+            font-family:
+                Inter,
+                Arial,
+                Helvetica,
+                sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        a:hover{
-            background:white;
-            color:black;
+        img,
+        video {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        /* Navigation */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            width: 100%;
+            padding: 22px 5%;
+
+            background: rgba(8, 8, 8, 0.72);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+        }
+
+        .navbar-logo {
+            width: 145px;
+            height: auto;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .navbar-links a {
+            color: var(--text-soft);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition:
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .navbar-links a:hover {
+            color: var(--text);
+            transform: translateY(-2px);
+        }
+
+        /* Hero */
+
+        .hero {
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 100vh;
+            padding: 130px 24px 70px;
+
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(0, 0, 0, 0.34) 0%,
+                    rgba(0, 0, 0, 0.5) 55%,
+                    var(--background) 100%
+                ),
+                radial-gradient(
+                    circle at center,
+                    transparent 0%,
+                    rgba(0, 0, 0, 0.45) 100%
+                );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+
+            width: min(900px, 100%);
+            text-align: center;
+        }
+
+        .hero-logo {
+            width: min(570px, 82vw);
+            margin: 0 auto 28px;
+            filter: drop-shadow(0 12px 35px rgba(0, 0, 0, 0.8));
+        }
+
+        .hero-subtitle {
+            max-width: 690px;
+            margin: 0 auto 36px;
+
+            color: rgba(255, 255, 255, 0.82);
+            font-size: clamp(17px, 2vw, 23px);
+        }
+
+        /* Buttons */
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 190px;
+            padding: 15px 25px;
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 999px;
+
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-decoration: none;
+            text-transform: uppercase;
+
+            background: rgba(15, 15, 15, 0.64);
+            backdrop-filter: blur(10px);
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .button-primary {
+            color: #111111;
+            background: var(--text);
+            border-color: var(--text);
+        }
+
+        .button-primary:hover {
+            color: #111111;
+            background: #dedede;
+        }
+
+        /* General sections */
+
+        .section {
+            width: min(var(--max-width), calc(100% - 44px));
+            margin: 0 auto;
+            padding: 115px 0;
+        }
+
+        .section-label {
+            margin-bottom: 12px;
+
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            max-width: 850px;
+            margin-bottom: 20px;
+
+            font-size: clamp(38px, 6vw, 78px);
+            font-weight: 900;
+            letter-spacing: -0.045em;
+            line-height: 0.98;
+        }
+
+        .section-description {
+            max-width: 730px;
+
+            color: var(--text-soft);
+            font-size: clamp(17px, 2vw, 21px);
+        }
+
+        /* Game cards */
+
+        .games {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px;
+            margin-top: 55px;
+        }
+
+        .game-card {
+            position: relative;
+            min-height: 650px;
+
+            border: 1px solid var(--border);
+            border-radius: 28px;
+
+            overflow: hidden;
+            background: var(--card);
+
+            transition:
+                transform 0.35s ease,
+                border-color 0.35s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.38);
+        }
+
+        .game-card-background {
+            position: absolute;
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .game-card:hover .game-card-background {
+            transform: scale(1.04);
+        }
+
+        .game-card-overlay {
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(0, 0, 0, 0.05) 20%,
+                    rgba(0, 0, 0, 0.35) 55%,
+                    rgba(0, 0, 0, 0.96) 100%
+                );
+        }
+
+        .game-card-content {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 2;
+
+            padding: 40px;
+        }
+
+        .game-status {
+            display: inline-block;
+            margin-bottom: 15px;
+            padding: 7px 12px;
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 999px;
+
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+
+            background: rgba(0, 0, 0, 0.42);
+            backdrop-filter: blur(10px);
+        }
+
+        .game-title {
+            margin-bottom: 12px;
+
+            font-size: clamp(30px, 4vw, 52px);
+            line-height: 1;
+        }
+
+        .game-description {
+            max-width: 570px;
+            margin-bottom: 24px;
+
+            color: rgba(255, 255, 255, 0.73);
+            font-size: 16px;
+        }
+
+        /* Gallery */
+
+        .gallery {
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            grid-template-rows: repeat(2, 300px);
+            gap: 18px;
+            margin-top: 55px;
+        }
+
+        .gallery-item {
+            position: relative;
+
+            border: 1px solid var(--border);
+            border-radius: 22px;
+
+            overflow: hidden;
+            background: var(--card);
+        }
+
+        .gallery-item:first-child {
+            grid-row: 1 / 3;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+            transition:
+                transform 0.5s ease,
+                filter 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.035);
+            filter: brightness(1.08);
+        }
+
+        /* About */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-panel {
+            min-height: 430px;
+            padding: 45px;
+
+            border: 1px solid var(--border);
+            border-radius: 28px;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(242, 201, 109, 0.12),
+                    transparent 45%
+                ),
+                var(--card);
+        }
+
+        .about-logo {
+            width: min(360px, 100%);
+            margin-bottom: 45px;
+        }
+
+        .about-stat {
+            padding: 20px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .about-stat strong {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 19px;
+        }
+
+        .about-stat span {
+            color: var(--text-soft);
+            font-size: 14px;
+        }
+
+        /* Call to action */
+
+        .cta {
+            position: relative;
+
+            width: min(var(--max-width), calc(100% - 44px));
+            margin: 30px auto 100px;
+            padding: 90px 32px;
+
+            border: 1px solid var(--border);
+            border-radius: 32px;
+
+            text-align: center;
+            overflow: hidden;
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(242, 201, 109, 0.16),
+                    transparent 55%
+                ),
+                var(--background-soft);
+        }
+
+        .cta h2 {
+            max-width: 800px;
+            margin: 0 auto 20px;
+
+            font-size: clamp(38px, 6vw, 72px);
+            line-height: 1;
+        }
+
+        .cta p {
+            max-width: 610px;
+            margin: 0 auto 34px;
+
+            color: var(--text-soft);
+            font-size: 18px;
+        }
+
+        /* Footer */
+
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+
+            width: min(var(--max-width), calc(100% - 44px));
+            margin: 0 auto;
+            padding: 35px 0 45px;
+
+            border-top: 1px solid var(--border);
+            color: #777777;
+            font-size: 13px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer a {
+            color: #a5a5a5;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #ffffff;
+        }
+
+        /* Reveal animation */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+
+        @media (max-width: 900px) {
+            .navbar-links a:not(.navbar-steam) {
+                display: none;
+            }
+
+            .games,
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-card {
+                min-height: 590px;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(3, 280px);
+            }
+
+            .gallery-item:first-child {
+                grid-row: auto;
+            }
+
+            .about-grid {
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 17px 20px;
+            }
+
+            .navbar-logo {
+                width: 115px;
+            }
+
+            .navbar-steam {
+                font-size: 11px !important;
+            }
+
+            .hero {
+                min-height: 92vh;
+            }
+
+            .hero-subtitle {
+                font-size: 17px;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .section {
+                width: min(100% - 28px, var(--max-width));
+                padding: 80px 0;
+            }
+
+            .games {
+                gap: 18px;
+            }
+
+            .game-card {
+                min-height: 520px;
+                border-radius: 20px;
+            }
+
+            .game-card-content {
+                padding: 25px;
+            }
+
+            .gallery {
+                grid-template-rows: repeat(3, 220px);
+            }
+
+            .cta {
+                width: calc(100% - 28px);
+                padding: 65px 22px;
+            }
+
+            .footer {
+                flex-direction: column;
+                align-items: flex-start;
+                width: calc(100% - 28px);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h1>Sungame Studio</h1>
+    <header class="navbar">
+        <a href="#home" aria-label="Sun Game Studio home">
+            <img
+                class="navbar-logo"
+                src="assets/logo.png"
+                alt="Sun Game Studio"
+            >
+        </a>
 
-    <p>Crafting unique indie games.</p>
+        <nav class="navbar-links" aria-label="Main navigation">
+            <a href="#games">Games</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#about">Studio</a>
 
-    <a href="https://store.steampowered.com/publisher/sungame">
-        Steam Developer Page
-    </a>
+            <a
+                class="navbar-steam"
+                href="https://store.steampowered.com/publisher/sungame"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Steam
+            </a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero" id="home">
+            <video
+                class="hero-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                poster="assets/mkbs-cover.webp"
+            >
+                <source
+                    src="assets/hero-video.mp4"
+                    type="video/mp4"
+                >
+            </video>
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <img
+                    class="hero-logo"
+                    src="assets/logo.png"
+                    alt="Sun Game Studio"
+                >
+
+                <p class="hero-subtitle">
+                    An independent game studio creating original,
+                    satisfying and memorable interactive experiences.
+                </p>
+
+                <div class="button-row">
+                    <a
+                        class="button button-primary"
+                        href="#games"
+                    >
+                        Discover our games
+                    </a>
+
+                    <a
+                        class="button"
+                        href="https://store.steampowered.com/publisher/sungame"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Steam developer page
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section reveal" id="games">
+            <p class="section-label">Our games</p>
+
+            <h1 class="section-title">
+                Small studio.<br>
+                Distinctive games.
+            </h1>
+
+            <p class="section-description">
+                We create games built around strong concepts,
+                tactile interactions and experiences players can
+                immediately understand and remember.
+            </p>
+
+            <div class="games">
+
+                <article class="game-card">
+                    <img
+                        class="game-card-background"
+                        src="assets/mkbs-cover.webp"
+                        alt="Mechanical Keyboard Building Simulator"
+                        loading="lazy"
+                    >
+
+                    <div class="game-card-overlay"></div>
+
+                    <div class="game-card-content">
+                        <span class="game-status">
+                            In development
+                        </span>
+
+                        <h2 class="game-title">
+                            Mechanical Keyboard<br>
+                            Building Simulator
+                        </h2>
+
+                        <p class="game-description">
+                            Build, customise and test unique mechanical
+                            keyboards inside a detailed and relaxing workshop.
+                        </p>
+
+                        <a
+                            class="button button-primary"
+                            href="https://store.steampowered.com/app/2392900/Mechanical_Keyboard_Building_Simulator/?curator_clanid=42658955"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            View on Steam
+                        </a>
+                    </div>
+                </article>
+
+                <article class="game-card">
+                    <img
+                        class="game-card-background"
+                        src="assets/one-try-only-cover.webp"
+                        alt="One Try Only"
+                        loading="lazy"
+                    >
+
+                    <div class="game-card-overlay"></div>
+
+                    <div class="game-card-content">
+                        <span class="game-status">
+                            Available on Steam
+                        </span>
+
+                        <h2 class="game-title">
+                            One Try Only!
+                        </h2>
+
+                        <p class="game-description">
+                            One attempt. One fall. One permanent consequence.
+                            A platformer where every movement matters.
+                        </p>
+
+                        <a
+                            class="button button-primary"
+                            href="TON_LIEN_STEAM_ONE_TRY_ONLY"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            View on Steam
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="section reveal" id="gallery">
+            <p class="section-label">Inside our worlds</p>
+
+            <h2 class="section-title">
+                Games made to feel<br>
+                as good as they look.
+            </h2>
+
+            <p class="section-description">
+                Every interaction, object and environment is designed
+                to create a satisfying and coherent player experience.
+            </p>
+
+            <div class="gallery">
+                <figure class="gallery-item">
+                    <img
+                        src="assets/screenshot-01.webp"
+                        alt="Sun Game Studio game screenshot"
+                        loading="lazy"
+                    >
+                </figure>
+
+                <figure class="gallery-item">
+                    <img
+                        src="assets/screenshot-02.webp"
+                        alt="Sun Game Studio game screenshot"
+                        loading="lazy"
+                    >
+                </figure>
+
+                <figure class="gallery-item">
+                    <img
+                        src="assets/screenshot-03.webp"
+                        alt="Sun Game Studio game screenshot"
+                        loading="lazy"
+                    >
+                </figure>
+            </div>
+        </section>
+
+        <section class="section reveal" id="about">
+            <div class="about-grid">
+
+                <div class="about-panel">
+                    <img
+                        class="about-logo"
+                        src="assets/logo.png"
+                        alt="Sun Game Studio"
+                        loading="lazy"
+                    >
+
+                    <div class="about-stat">
+                        <strong>Independent</strong>
+                        <span>
+                            Creative decisions made without compromise.
+                        </span>
+                    </div>
+
+                    <div class="about-stat">
+                        <strong>Based in France</strong>
+                        <span>
+                            Developing games for players around the world.
+                        </span>
+                    </div>
+
+                    <div class="about-stat">
+                        <strong>Built with Unity</strong>
+                        <span>
+                            Focused on polished gameplay and strong visuals.
+                        </span>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="section-label">
+                        About the studio
+                    </p>
+
+                    <h2 class="section-title">
+                        Ideas first.<br>
+                        Everything else follows.
+                    </h2>
+
+                    <p class="section-description">
+                        Sun Game Studio is an independent French game
+                        studio focused on creating original games with
+                        instantly recognisable concepts.
+                        <br><br>
+                        Our projects explore customisation, simulation,
+                        challenge and satisfying physical interactions.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="cta reveal">
+            <p class="section-label">
+                Follow the studio
+            </p>
+
+            <h2>
+                Discover everything<br>
+                we are building.
+            </h2>
+
+            <p>
+                Visit our Steam developer page to find our current games,
+                future releases and upcoming announcements.
+            </p>
+
+            <div class="button-row">
+                <a
+                    class="button button-primary"
+                    href="https://store.steampowered.com/publisher/sungame"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Steam developer page
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>
+            © <span id="current-year"></span>
+            Sun Game Studio. All rights reserved.
+        </p>
+
+        <div class="footer-links">
+            <a
+                href="https://store.steampowered.com/publisher/sungame"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Steam
+            </a>
+
+            <a href="#home">
+                Back to top
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        const revealElements =
+            document.querySelectorAll(".reveal");
+
+        const revealObserver =
+            new IntersectionObserver(
+                (entries, observer) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    });
+                },
+                {
+                    threshold: 0.12
+                }
+            );
+
+        revealElements.forEach((element) => {
+            revealObserver.observe(element);
+        });
+
+        document.getElementById("current-year").textContent =
+            new Date().getFullYear();
+    </script>
 
 </body>
 </html>
